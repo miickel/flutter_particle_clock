@@ -8,8 +8,8 @@ Building this was a bit of a struggle as I'm not very good with math, but the fr
 
 ## Highlights
 
-  - Randomizes color palettes while still maintaining legibility at all times.
+  - Randomly selects color palettes while still maintaining legibility at all times.
   - Supports both **light mode** and **dark mode**, by filtering background color by luminance.
-  - Scales to fit the screen space available and scales rendering accordingly.
+  - Scales to fit the screen space available and adjust calculations & rendering accordingly.
   - At least 60 FPS on modern devices.
-  - Constantly moving and interesting to look at.
+  - Constantly shifting and moving, making it fun to look at.
