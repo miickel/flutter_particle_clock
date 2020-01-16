@@ -14,6 +14,7 @@ class ClockSecondsPainter extends CustomPainter {
     var now = DateTime.now();
     var secSize = pi / 50;
 
+    // Animate smoothly with easing.
     var msecs = Curves.easeOutCirc.transform(now.millisecond / 1000);
     msecs = msecs * 2 * pi / 60;
 

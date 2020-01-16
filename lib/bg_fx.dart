@@ -40,9 +40,7 @@ class BgFx extends ClockFx {
     var xRnd = Rnd.getDouble(0, width / 5);
     p.x = Rnd.getBool() ? width - xRnd : 0 + xRnd;
     p.y = Rnd.getDouble(0, height);
-    p.a = Rnd.ratio > .95
-        ? Rnd.getDouble(.6, .8)
-        : Rnd.getDouble(.08, .4);
+    p.a = Rnd.ratio > .95 ? Rnd.getDouble(.6, .8) : Rnd.getDouble(.08, .4);
     p.isFilled = Rnd.getBool();
     p.size = Rnd.getDouble(height / 20, height / 5);
 

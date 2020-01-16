@@ -1,10 +1,10 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-// Number of sections to divide the clock face.
+/// The number of sections to divide the clock face.
 final int arms = 60;
 
-// Which parts of the sections to indicate quarters.
+/// Which parts of the sections to indicate quarters.
 final int quarters = (arms / 12).floor();
 
 class ClockFacePainter extends CustomPainter {

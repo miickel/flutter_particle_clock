@@ -30,9 +30,11 @@ class ParticleClockFx extends ClockFx {
         ? Curves.easeInOutSine.transform(secFrac)
         : 1;
 
+    // Used to avoid emitting all particles at once.
     var maxSpawnPerTick = 5;
 
     particles.asMap().forEach((i, p) {
+      // Movement
       p.x -= p.vx * vecSpeed;
       p.y -= p.vy * vecSpeed;
 
@@ -41,20 +43,24 @@ class ParticleClockFx extends ClockFx {
 
       p.lifeLeft = p.life - p.distFrac;
 
+      // Gradually reduce the speed of Noise particles.
       if (p.type == ParticleType.noise) {
         p.vx -= p.lifeLeft * p.vx * .001;
         p.vy -= p.lifeLeft * p.vy * .001;
       }
 
+      // Gradually reduce the size of all particles.
       if (p.lifeLeft < .3) {
         p.size -= p.size * .0015;
       }
 
+      // Add random movement to 5% of the particles.
       if (p.distribution > 95) {
         p.x -= Rnd.getDouble(-1, 1) * p.distFrac;
         p.y -= Rnd.getDouble(-1, 1) * p.distFrac;
       }
 
+      // Reset particles once they are invisible or at the edge.
       if (p.lifeLeft <= 0 || p.size <= .5) {
         resetParticle(i);
         if (maxSpawnPerTick > 0) {
@@ -140,18 +146,22 @@ class ParticleClockFx extends ClockFx {
     p.vy *= v;
   }
 
+  /// Gets the radians of the hour hand.
   double _getHourRadians() =>
       (time.hour * pi / 6) +
       (time.minute * pi / (6 * 60)) +
       (time.second * pi / (360 * 60));
 
+  /// Gets the radians of the minute hand.
   double _getMinuteRadians() =>
       (time.minute * (2 * pi) / 60) + (time.second * pi / (30 * 60));
 
+  /// Checks if a value is between two other values.
   bool _isBetween(double value, double min, double max) {
     return value >= min && value <= max;
   }
 
+  /// Calculates the distance from center using pythagoras rate.
   double _getDistanceFromCenter(Particle p) {
     var a = pow(center.dx - p.x, 2);
     var b = pow(center.dy - p.y, 2);

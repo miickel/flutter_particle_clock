@@ -20,8 +20,13 @@ class Scene extends StatefulWidget {
   final DateTime time;
   final Brightness brightness;
 
-  const Scene({Key key, this.size, this.palettes, this.time, this.brightness})
-      : super(key: key);
+  const Scene({
+    Key key,
+    this.size,
+    this.palettes,
+    this.time,
+    this.brightness,
+  }) : super(key: key);
 
   @override
   SceneState createState() => SceneState();
@@ -63,6 +68,8 @@ class SceneState extends State<Scene> with SingleTickerProviderStateMixin {
         oldWidget.brightness != widget.brightness) {
       _fx.setTime(widget.time);
       _bgFx.setTime(widget.time);
+
+      // Change palette every 15th second to keep things interesting.
       if (widget.time.second % 15 == 0 ||
           oldWidget.brightness != widget.brightness) {
         _updatePalette();
@@ -96,7 +103,6 @@ class SceneState extends State<Scene> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    var faceSize = widget.size.height * .85;
     return AnimatedContainer(
       duration: Duration(milliseconds: 1500),
       curve: Curves.easeOut,
@@ -104,8 +110,8 @@ class SceneState extends State<Scene> with SingleTickerProviderStateMixin {
       child: ClipRect(
         child: Stack(
           children: <Widget>[
-            _buildBlurFx(),
-            _buildClockFace(faceSize),
+            _buildBgBlurFx(),
+            _buildClockFace(),
             CustomPaint(
               painter: ClockFxPainter(fx: _fx),
               child: Container(),
@@ -116,7 +122,7 @@ class SceneState extends State<Scene> with SingleTickerProviderStateMixin {
     );
   }
 
-  Widget _buildBlurFx() {
+  Widget _buildBgBlurFx() {
     return RepaintBoundary(
       child: Stack(
         children: <Widget>[
@@ -139,7 +145,8 @@ class SceneState extends State<Scene> with SingleTickerProviderStateMixin {
     );
   }
 
-  Widget _buildClockFace(double faceSize) {
+  Widget _buildClockFace() {
+    var faceSize = widget.size.height * .85;
     return Center(
       child: Container(
         width: faceSize,

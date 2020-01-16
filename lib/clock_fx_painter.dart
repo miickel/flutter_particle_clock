@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'clock_fx.dart';
 import 'particle.dart';
 
-// Where handles should start, denoted in percentage of full radius.
+/// Where handles should start, denoted in percentage of full radius.
 const double handlesStart = .1;
 
-// Where noise should start, denoted in percentage of full radius.
+/// Where noise should start, denoted in percentage of full radius.
 const double noiseStart = .15;
 
 class ClockFxPainter extends CustomPainter {
