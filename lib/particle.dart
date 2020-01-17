@@ -11,7 +11,7 @@ class Particle {
   /// The particle's Y-position.
   double y;
 
-  /// The particle's alpha value (0-1).
+  /// The particle's emit angle in radians.
   double a;
 
   /// Speed vector (horizontally).
