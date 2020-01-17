@@ -9,11 +9,17 @@ import 'utils/rnd.dart';
 
 final easingDelayDuration = Duration(seconds: 10);
 
-// Probabilities of Hour, Minute, Noise.
+/// Probabilities of Hour, Minute, Noise.
 final particleDistributions = [2, 4, 100];
 
-// Number of "arms" to emit noise particles from center.
+/// Number of "arms" to emit noise particles from center.
 final int noiseAngles = 2000;
+
+/// Threshold for particles to go rouge. Lower = more particles.
+final rougeDistributionLmt = 85;
+
+/// Threshold for particles to go jelly. Lower = more particles.
+final jellyDistributionLmt = 97;
 
 class ParticleClockFx extends ClockFx {
   ParticleClockFx({@required Size size, @required DateTime time})
@@ -24,11 +30,13 @@ class ParticleClockFx extends ClockFx {
 
   @override
   void tick(Duration duration) {
-    var secFrac = 1 - (DateTime.now().millisecond / 1000);
+    var secFrac = DateTime.now().millisecond / 1000;
 
     var vecSpeed = duration.compareTo(easingDelayDuration) > 0
-        ? Curves.easeInOutSine.transform(secFrac)
+        ? Curves.easeInOutSine.transform(1 - secFrac)
         : 1;
+
+    var vecSpeedInv = Curves.easeInSine.transform(secFrac);
 
     // Used to avoid emitting all particles at once.
     var maxSpawnPerTick = 5;
@@ -54,10 +62,19 @@ class ParticleClockFx extends ClockFx {
         p.size -= p.size * .0015;
       }
 
-      // Add random movement to 5% of the particles.
-      if (p.distribution > 95) {
-        p.x -= Rnd.getDouble(-1, 1) * p.distFrac;
-        p.y -= Rnd.getDouble(-1, 1) * p.distFrac;
+      // Make some of the particles go rouge.
+      if (p.distribution > rougeDistributionLmt &&
+          p.distribution < jellyDistributionLmt) {
+        var r = Rnd.getDouble(.2, 2.5) * vecSpeedInv * p.distFrac;
+        p.x -= p.vx * r + (p.distFrac * Rnd.getDouble(-.4, .4));
+        p.y -= p.vy * r + (p.distFrac * Rnd.getDouble(-.4, .4));
+      }
+
+      // Make some of the particles ease back, for a jelly effect.
+      if (p.distribution >= jellyDistributionLmt) {
+        var r = Rnd.getDouble(.1, .6) * vecSpeedInv * (1 - p.lifeLeft);
+        p.x += p.vx * r;
+        p.y += p.vy * r;
       }
 
       // Reset particles once they are invisible or at the edge.
