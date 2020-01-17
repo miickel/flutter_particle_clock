@@ -13,3 +13,7 @@ Building this was a bit of a struggle as I'm not very good with math, but the fr
   - 📱 Scales to fit the screen space available and adjust calculations & rendering accordingly.
   - 🚀 At least 60 FPS on modern devices.
   - 🌈 Constantly shifting and moving, making it fun to look at.
+  
+## Preview
+
+<img src="https://imgur.com/5FbUY6W" />
