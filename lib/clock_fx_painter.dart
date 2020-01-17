@@ -12,6 +12,9 @@ const double handlesStart = .1;
 /// Where noise should start, denoted in percentage of full radius.
 const double noiseStart = .15;
 
+/// Alpha value for noise particles.
+const double noiseAlpha = 160;
+
 class ClockFxPainter extends CustomPainter {
   ClockFx fx;
 
@@ -21,12 +24,19 @@ class ClockFxPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     fx.particles.forEach((p) {
-      var alpha = (p.type == ParticleType.noise
-              ? (p.distFrac <= noiseStart) ? 0 : min(160, p.lifeLeft * 3 * 255)
-              : (p.distFrac <= handlesStart)
-                  ? 255 * Curves.easeIn.transform(p.distFrac / handlesStart)
-                  : min(255, p.lifeLeft * 10 * 255))
-          .floor();
+      double a;
+
+      // Fade in particles by calculating alpha based on distance.
+      if (p.type == ParticleType.noise) {
+        a = max(0.0, (p.distFrac - .13) / p.distFrac) * 255;
+        a = min(a, min(noiseAlpha, p.lifeLeft * 3 * 255));
+      } else {
+        a = p.distFrac <= handlesStart
+            ? 255 * Curves.easeIn.transform(p.distFrac / handlesStart)
+            : min(255, p.lifeLeft * 10 * 255);
+      }
+
+      var alpha = a.floor();
 
       var circlePaint = Paint()
         ..style = PaintingStyle.stroke
