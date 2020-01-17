@@ -33,13 +33,13 @@ class ParticleClockFx extends ClockFx {
     var secFrac = DateTime.now().millisecond / 1000;
 
     var vecSpeed = duration.compareTo(easingDelayDuration) > 0
-        ? Curves.easeInOutSine.transform(1 - secFrac)
+        ? max(.2, Curves.easeInOutSine.transform(1 - secFrac))
         : 1;
 
     var vecSpeedInv = Curves.easeInSine.transform(secFrac);
 
     // Used to avoid emitting all particles at once.
-    var maxSpawnPerTick = 5;
+    var maxSpawnPerTick = 10;
 
     particles.asMap().forEach((i, p) {
       // Movement
@@ -72,7 +72,7 @@ class ParticleClockFx extends ClockFx {
 
       // Make some of the particles ease back, for a jelly effect.
       if (p.distribution >= jellyDistributionLmt) {
-        var r = Rnd.getDouble(.1, .6) * vecSpeedInv * (1 - p.lifeLeft);
+        var r = Rnd.getDouble(.1, .9) * vecSpeedInv * (1 - p.lifeLeft);
         p.x += p.vx * r;
         p.y += p.vy * r;
       }
