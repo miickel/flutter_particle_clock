@@ -115,7 +115,7 @@ class ParticleClockFx extends ClockFx {
         angle = _getHourRadians();
         p.life = Rnd.getDouble(.5, .55);
         p.size = sizeMin * .010;
-        p.isFlowing = Rnd.ratio > .8;
+        p.isFlowing = Rnd.ratio > .85;
         p.color = palette.components[palette.components.length - 1];
         break;
 
@@ -123,7 +123,7 @@ class ParticleClockFx extends ClockFx {
         angle = _getMinuteRadians();
         p.life = Rnd.getDouble(.68, .73);
         p.size = sizeMin * .008;
-        p.isFlowing = Rnd.ratio > .8;
+        p.isFlowing = Rnd.ratio > .6;
         p.color = palette.components[palette.components.length - 1];
         break;
 
