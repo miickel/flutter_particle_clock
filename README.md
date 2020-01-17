@@ -16,4 +16,6 @@ Building this was a bit of a struggle as I'm not very good with math, but the fr
   
 ## Preview
 
-<img src="https://imgur.com/5FbUY6W" />
+<div align="center">
+  <img src="particle-clock-montage-min.png" />
+</div>
