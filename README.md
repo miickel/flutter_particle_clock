@@ -19,6 +19,11 @@ Building this was a bit of a struggle as I'm not very good with math, but the fr
 <div align="center">
   <img src="particle-clock-montage-min.png" />
 </div>
+<p align="center">
+  <br/>
+  🎬 <a href="https://twitter.com/Miickel/status/1219311659984080897">Watch it in action on Twitter</a> 🎬
+</p>
+
 
 ## License
 
