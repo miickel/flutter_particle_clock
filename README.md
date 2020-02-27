@@ -6,6 +6,8 @@ I ended up with an analog watch face featuring a simple particle system. It rand
 
 Building this was a bit of a struggle as I'm not very good with math, but the framework and the developer experience (hot reload, in particular) helped me out a lot. Being able to iterate quickly is a great way to learn new things. I guess the code could be improved in several ways, both in terms of elegance and performance. However, I've managed to easily stay far below the 16ms/frame benchmark (average 5ms/frame on my iPad while debugging). Flutter's rendering engine performs fantastically, even with my horrible math! 😅
 
+**Visit [Ultimate Machine](https://ultimatemachine.se/articles/how-i-created-a-particle-clock-and-won-the-flutterclock-challenge/) for a detailed write-up on how this was built.**
+
 ## Highlights
 
   - 🎨 Randomly selects color palettes while still maintaining legibility at all times.
