@@ -10,7 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_clock_helper:
-    path: ../flutter_clock_helper
+    git:
+      url: git://github.com/flutter/flutter_clock.git
+      path: flutter_clock_helper
 
 dev_dependencies:
   flutter_test:
