@@ -26,6 +26,14 @@ Building this was a bit of a struggle as I'm not very good with math, but the fr
   🎬 <a href="https://twitter.com/Miickel/status/1219311659984080897">Watch it in action on Twitter</a> 🎬
 </p>
 
+## Fans
+
+People around the world are using m work, see below:
+
+- [Adrien](https://www.linkedin.com/in/adrien-sales/) a fan from New-Caledonia wrote a [dedicated FanArticle](https://www.linkedin.com/pulse/spread-monozukuri-culture-your-workplace-relax-let-code-adrien-sales/)
+
+You are also using this amazing clockface ? Share your experience.
+
 
 ## License
 
