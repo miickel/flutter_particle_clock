@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_particle_clock">
+    package="com.example.particle_clock">
    <application
-        android:label="flutter_particle_clock"
+        android:label="particle_clock"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

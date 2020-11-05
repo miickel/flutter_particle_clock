@@ -1,6 +1,6 @@
 {
-    "name": "flutter_particle_clock",
-    "short_name": "flutter_particle_clock",
+    "name": "particle_clock",
+    "short_name": "particle_clock",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

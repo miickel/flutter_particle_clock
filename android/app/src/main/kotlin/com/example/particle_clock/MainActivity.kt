@@ -1,4 +1,4 @@
-package com.example.flutter_particle_clock
+package com.example.particle_clock
 
 import io.flutter.embedding.android.FlutterActivity
 
