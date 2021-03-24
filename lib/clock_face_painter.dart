@@ -8,9 +8,9 @@ final int arms = 60;
 final int quarters = (arms / 12).floor();
 
 class ClockFacePainter extends CustomPainter {
-  final Color accentColor;
+  final Color? accentColor;
 
-  ClockFacePainter({@required this.accentColor});
+  ClockFacePainter({required this.accentColor});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -22,7 +22,7 @@ class ClockFacePainter extends CustomPainter {
     var paint = Paint()
       ..style = PaintingStyle.fill
       ..strokeWidth = circleRaidus * .5
-      ..color = accentColor;
+      ..color = accentColor!;
 
     for (var i = 1; i <= arms; i++) {
       var angle = i * 360 / arms;
@@ -34,7 +34,7 @@ class ClockFacePainter extends CustomPainter {
           point,
           circleRaidus * 2,
           paint
-            ..color = accentColor
+            ..color = accentColor!
             ..style = PaintingStyle.fill,
         );
       } else {
@@ -42,7 +42,7 @@ class ClockFacePainter extends CustomPainter {
           point,
           circleRaidus,
           paint
-            ..color = accentColor.withAlpha(100)
+            ..color = accentColor!.withAlpha(100)
             ..style = PaintingStyle.stroke,
         );
       }

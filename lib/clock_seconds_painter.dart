@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class ClockSecondsPainter extends CustomPainter {
-  final Color accentColor;
+  final Color? accentColor;
 
-  ClockSecondsPainter({@required this.accentColor});
+  ClockSecondsPainter({required this.accentColor});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -28,7 +28,7 @@ class ClockSecondsPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = center.dy * .003
       ..strokeCap = StrokeCap.round
-      ..color = accentColor.withAlpha(40);
+      ..color = accentColor!.withAlpha(40);
 
     var outerRect = Rect.fromCenter(
       center: center,
@@ -50,7 +50,7 @@ class ClockSecondsPainter extends CustomPainter {
 
     paint
       ..strokeWidth = center.dy * .015
-      ..color = accentColor;
+      ..color = accentColor!;
 
     // Outer indicator.
     canvas.drawArc(outerRect, timeAngle, secSize, false, paint);

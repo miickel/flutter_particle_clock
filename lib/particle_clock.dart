@@ -18,7 +18,7 @@ class ParticleClock extends StatefulWidget {
 class _ParticleClockState extends State<ParticleClock>
     with SingleTickerProviderStateMixin {
   DateTime _dateTime = DateTime.now();
-  Timer _timer;
+  Timer? _timer;
   double seek = 0.0;
   double seekIncrement = 1 / 3600;
 
@@ -83,7 +83,7 @@ class _ParticleClockState extends State<ParticleClock>
           );
         }
 
-        List<Palette> palettes = snapshot.data;
+        List<Palette>? palettes = snapshot.data as List<Palette>?;
 
         return LayoutBuilder(
           builder: (context, constraints) {

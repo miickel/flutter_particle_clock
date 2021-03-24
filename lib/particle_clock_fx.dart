@@ -22,7 +22,7 @@ final rougeDistributionLmt = 85;
 final jellyDistributionLmt = 97;
 
 class ParticleClockFx extends ClockFx {
-  ParticleClockFx({@required Size size, @required DateTime time})
+  ParticleClockFx({required Size size, required DateTime? time})
       : super(
           size: size,
           time: time,
@@ -43,7 +43,7 @@ class ParticleClockFx extends ClockFx {
 
     particles.asMap().forEach((i, p) {
       // Movement
-      p.x -= p.vx * vecSpeed;
+      p!.x -= p.vx * vecSpeed;
       p.y -= p.vy * vecSpeed;
 
       p.dist = _getDistanceFromCenter(p);
@@ -108,7 +108,7 @@ class ParticleClockFx extends ClockFx {
       p.type = ParticleType.noise;
     }
 
-    double angle;
+    double? angle;
 
     switch (p.type) {
       case ParticleType.hour:
@@ -116,7 +116,7 @@ class ParticleClockFx extends ClockFx {
         p.life = Rnd.getDouble(.5, .55);
         p.size = sizeMin * .010;
         p.isFlowing = Rnd.ratio > .85;
-        p.color = palette.components[palette.components.length - 1];
+        p.color = palette!.components![palette!.components!.length - 1];
         break;
 
       case ParticleType.minute:
@@ -124,7 +124,7 @@ class ParticleClockFx extends ClockFx {
         p.life = Rnd.getDouble(.68, .73);
         p.size = sizeMin * .008;
         p.isFlowing = Rnd.ratio > .6;
-        p.color = palette.components[palette.components.length - 1];
+        p.color = palette!.components![palette!.components!.length - 1];
         break;
 
       case ParticleType.noise:
@@ -136,7 +136,7 @@ class ParticleClockFx extends ClockFx {
         // Probably not the most efficient solution right here.
         do {
           angle = Rnd.ratio * pi * 2;
-        } while (_isBetween(angle, am - d, am + d) ||
+        } while (_isBetween(angle!, am - d, am + d) ||
             _isBetween(angle, ah - d, ah + d));
 
         p.life = Rnd.getDouble(0.75, .8);
@@ -165,13 +165,13 @@ class ParticleClockFx extends ClockFx {
 
   /// Gets the radians of the hour hand.
   double _getHourRadians() =>
-      (time.hour * pi / 6) +
-      (time.minute * pi / (6 * 60)) +
-      (time.second * pi / (360 * 60));
+      (time!.hour * pi / 6) +
+      (time!.minute * pi / (6 * 60)) +
+      (time!.second * pi / (360 * 60));
 
   /// Gets the radians of the minute hand.
   double _getMinuteRadians() =>
-      (time.minute * (2 * pi) / 60) + (time.second * pi / (30 * 60));
+      (time!.minute * (2 * pi) / 60) + (time!.second * pi / (30 * 60));
 
   /// Checks if a value is between two other values.
   bool _isBetween(double value, double min, double max) {

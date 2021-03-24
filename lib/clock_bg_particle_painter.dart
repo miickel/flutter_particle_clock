@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'clock_fx.dart';
 
 class ClockBgParticlePainter extends CustomPainter {
-  ClockFx fx;
+  ClockFx? fx;
 
   // ChangeNotifier used as repaint notifier.
-  ClockBgParticlePainter({@required this.fx}) : super(repaint: fx);
+  ClockBgParticlePainter({required this.fx}) : super(repaint: fx);
 
   @override
   void paint(Canvas canvas, Size size) {
-    fx.particles.forEach((p) {
-      var pos = Offset(p.x, p.y);
+    fx!.particles.forEach((p) {
+      var pos = Offset(p!.x, p.y);
 
       var paint = Paint()
         ..color = p.color.withAlpha((255 * p.a).floor())
