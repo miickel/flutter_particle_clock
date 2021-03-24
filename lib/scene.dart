@@ -15,13 +15,13 @@ import 'particle_clock_fx.dart';
 import 'utils/rnd.dart';
 
 class Scene extends StatefulWidget {
-  final Size size;
-  final List<Palette> palettes;
-  final DateTime time;
-  final Brightness brightness;
+  final Size? size;
+  final List<Palette>? palettes;
+  final DateTime? time;
+  final Brightness? brightness;
 
   const Scene({
-    Key key,
+    Key? key,
     this.size,
     this.palettes,
     this.time,
@@ -33,22 +33,22 @@ class Scene extends StatefulWidget {
 }
 
 class SceneState extends State<Scene> with SingleTickerProviderStateMixin {
-  Ticker _ticker;
-  ClockFx _fx;
-  BgFx _bgFx;
-  Palette _palette;
-  Color _bgColor;
-  Color _accentColor;
+  late Ticker _ticker;
+  ClockFx? _fx;
+  BgFx? _bgFx;
+  late Palette _palette;
+  Color? _bgColor;
+  Color? _accentColor;
 
   @override
   void initState() {
     _ticker = createTicker(_tick)..start();
     _fx = ParticleClockFx(
-      size: widget.size,
+      size: widget.size!,
       time: widget.time,
     );
     _bgFx = BgFx(
-      size: widget.size,
+      size: widget.size!,
       time: widget.time,
     );
     _updatePalette();
@@ -66,20 +66,20 @@ class SceneState extends State<Scene> with SingleTickerProviderStateMixin {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.time != widget.time ||
         oldWidget.brightness != widget.brightness) {
-      _fx.setTime(widget.time);
-      _bgFx.setTime(widget.time);
+      _fx!.setTime(widget.time);
+      _bgFx!.setTime(widget.time);
 
       // Change palette every 15th second to keep things interesting.
-      if (widget.time.second % 15 == 0 ||
+      if (widget.time!.second % 15 == 0 ||
           oldWidget.brightness != widget.brightness) {
         _updatePalette();
       }
     }
 
     if (oldWidget.size != widget.size) {
-      _fx.setSize(widget.size);
-      _bgFx.setSize(widget.size);
-      _bgFx.tick(Duration(days: 0)); // Trigger repaint.
+      _fx!.setSize(widget.size!);
+      _bgFx!.setSize(widget.size!);
+      _bgFx!.tick(Duration(days: 0)); // Trigger repaint.
     }
   }
 
@@ -90,15 +90,15 @@ class SceneState extends State<Scene> with SingleTickerProviderStateMixin {
   void _updatePalette() {
     var isDarkMode = widget.brightness == Brightness.dark;
     _palette = Rnd.getPalette(widget.palettes, isDarkMode);
-    _bgColor = _palette.components[0];
-    _accentColor = _palette.components[_palette.components.length - 1];
-    _fx.setPalette(_palette);
-    _bgFx.setPalette(_palette);
+    _bgColor = _palette.components![0];
+    _accentColor = _palette.components![_palette.components!.length - 1];
+    _fx!.setPalette(_palette);
+    _bgFx!.setPalette(_palette);
   }
 
   void _tick(Duration duration) {
-    _fx.tick(duration);
-    if (widget.time.second % 5 == 0) _bgFx.tick(duration);
+    _fx!.tick(duration);
+    if (widget.time!.second % 5 == 0) _bgFx!.tick(duration);
   }
 
   @override
@@ -134,7 +134,7 @@ class SceneState extends State<Scene> with SingleTickerProviderStateMixin {
           ),
           BackdropFilter(
             filter: ImageFilter.blur(
-              sigmaX: widget.size.width * .05,
+              sigmaX: widget.size!.width * .05,
               sigmaY: 0,
             ),
             // filter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
@@ -146,7 +146,7 @@ class SceneState extends State<Scene> with SingleTickerProviderStateMixin {
   }
 
   Widget _buildClockFace() {
-    var faceSize = widget.size.height * .85;
+    var faceSize = widget.size!.height * .85;
     return Center(
       child: Container(
         width: faceSize,
@@ -165,7 +165,7 @@ class SceneState extends State<Scene> with SingleTickerProviderStateMixin {
             RepaintBoundary(
               key: Key(_accentColor.toString()),
               child: CustomPaint(
-                size: widget.size,
+                size: widget.size!,
                 painter: ClockFacePainter(
                   accentColor: _accentColor,
                 ),

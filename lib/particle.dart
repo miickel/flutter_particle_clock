@@ -39,7 +39,7 @@ class Particle {
   bool isFilled;
 
   /// If the particle should have "speed marks".
-  bool isFlowing;
+  bool? isFlowing;
 
   /// The color of the particle.
   Color color;

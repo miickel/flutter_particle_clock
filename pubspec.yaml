@@ -1,18 +1,18 @@
 name: particle_clock
 description: Mickel's entry for the Flutter Clock challenge.
-
+publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: ^2.10.0
-  flutter: ^1.23.0
+  sdk: '>=2.12.0 <3.0.0'
+  flutter: ^2.0.0
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_clock_helper:
     git:
-      url: git://github.com/flutter/flutter_clock.git
+      url: https://github.com/domesticmouse/flutter_clock
       path: flutter_clock_helper
 
 dev_dependencies:

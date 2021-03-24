@@ -10,7 +10,7 @@ import 'utils/rnd.dart';
 final easingDelayDuration = Duration(seconds: 15);
 
 class BgFx extends ClockFx {
-  BgFx({@required Size size, @required DateTime time})
+  BgFx({required Size size, required DateTime? time})
       : super(
           size: size,
           time: time,
@@ -26,7 +26,7 @@ class BgFx extends ClockFx {
         : 1;
 
     particles.forEach((p) {
-      p.y -= p.vy * vecSpeed;
+      p!.y -= p.vy * vecSpeed;
 
       if (p.y > height || p.y < 0 || p.life == 0) {
         _activateParticle(p);

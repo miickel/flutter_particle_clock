@@ -16,18 +16,18 @@ const double noiseStart = .15;
 const double noiseAlpha = 160;
 
 class ClockFxPainter extends CustomPainter {
-  ClockFx fx;
+  ClockFx? fx;
 
   // ChangeNotifier used as repaint notifier.
-  ClockFxPainter({@required this.fx}) : super(repaint: fx);
+  ClockFxPainter({required this.fx}) : super(repaint: fx);
 
   @override
   void paint(Canvas canvas, Size size) {
-    fx.particles.forEach((p) {
+    fx!.particles.forEach((p) {
       double a;
 
       // Fade in particles by calculating alpha based on distance.
-      if (p.type == ParticleType.noise) {
+      if (p!.type == ParticleType.noise) {
         a = max(0.0, (p.distFrac - .13) / p.distFrac) * 255;
         a = min(a, min(noiseAlpha, p.lifeLeft * 3 * 255));
       } else {
@@ -50,7 +50,7 @@ class ClockFxPainter extends CustomPainter {
         circlePaint.style = PaintingStyle.fill;
 
         // Draw gradient arc stroke on some filled particles.
-        if (p.isFlowing) {
+        if (p.isFlowing!) {
           var threshold = p.distribution < 2 ? .2 : .4;
           var flowAlpha = max(0, (p.distFrac - threshold) / p.distFrac) * alpha;
           var shader = SweepGradient(
@@ -63,7 +63,7 @@ class ClockFxPainter extends CustomPainter {
             transform: GradientRotation(p.a),
             stops: [.6, 1],
           ).createShader(Rect.fromCircle(
-            center: fx.center,
+            center: fx!.center,
             radius: p.dist,
           ));
 
@@ -72,7 +72,7 @@ class ClockFxPainter extends CustomPainter {
             ..shader = shader
             ..style = PaintingStyle.stroke;
 
-          canvas.drawCircle(fx.center, p.dist, gradientPaint);
+          canvas.drawCircle(fx!.center, p.dist, gradientPaint);
         }
       }
 

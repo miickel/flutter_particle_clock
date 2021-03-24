@@ -51,12 +51,12 @@ class Rnd {
   /// Gets a random palette from a list of palettes and sorts its' colors by luminance.
   ///
   /// Given if [dark] or not, this method makes sure the luminance of the background color is valid.
-  static Palette getPalette(List<Palette> palettes, bool dark) {
-    Palette result;
+  static Palette getPalette(List<Palette>? palettes, bool dark) {
+    Palette? result;
 
     while (result == null) {
-      Palette palette = Rnd.getItem(palettes);
-      List<Color> colors = Rnd.shuffle(palette.components);
+      Palette palette = Rnd.getItem(palettes!);
+      List<Color> colors = Rnd.shuffle(palette.components!) as List<Color>;
 
       var luminance = colors[0].computeLuminance();
 
@@ -78,7 +78,7 @@ class Rnd {
         });
 
         List<Color> sortedColors =
-            lumDiff.map((d) => colors[d[0] + 1]).toList();
+            lumDiff.map((d) => colors[d[0] + 1 as int]).toList();
 
         result = Palette(
           components: [colors[0]] + sortedColors,
